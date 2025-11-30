@@ -1,0 +1,2005 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EliteBonus - Премиальные предложения</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --primary-dark: #5A52D5;
+            --primary-light: #8B85FF;
+            --secondary: #FF6584;
+            --accent: #00D2A8;
+            --dark: #1A1A2E;
+            --darker: #0F0F1A;
+            --light: #F5F5FA;
+            --gray: #A0A0B0;
+            --gold: #FFD166;
+            --gradient: linear-gradient(135deg, #6C63FF 0%, #FF6584 100%);
+            --gradient-dark: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+            --gradient-gold: linear-gradient(135deg, #FFD166 0%, #FF9E6D 100%);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.3);
+            --radius: 16px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--gradient-dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(26, 26, 46, 0.5);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 32px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(108, 99, 255, 0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .hero-title {
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-title .highlight {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .hero-description {
+            font-size: 20px;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 50px;
+            line-height: 1.6;
+        }
+
+        .hero-description strong {
+            color: var(--primary-light);
+            font-weight: 700;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: var(--gray);
+        }
+
+        /* Constructor */
+        .constructor {
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: var(--radius);
+            padding: 50px;
+            margin-bottom: 80px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .step {
+            transition: var(--transition);
+        }
+
+        .step.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--light);
+        }
+
+        .step-number.active {
+            background: var(--gradient);
+        }
+
+        .step-title {
+            font-size: 24px;
+            color: var(--light);
+            font-weight: 600;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .option-card {
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .option-card.active {
+            border-color: var(--primary);
+            background: rgba(108, 99, 255, 0.1);
+        }
+
+        .option-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--light);
+        }
+
+        .option-card.active .option-icon {
+            background: var(--gradient);
+        }
+
+        .option-title {
+            font-size: 18px;
+            color: var(--light);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .option-description {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.4;
+        }
+
+        .deposit-values {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .deposit-value {
+            flex: 1;
+            text-align: center;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .deposit-value:hover {
+            border-color: var(--primary);
+        }
+
+        .deposit-value.active {
+            border-color: var(--primary);
+            background: rgba(108, 99, 255, 0.1);
+        }
+
+        .deposit-amount {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .deposit-label {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .game-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .game-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .game-card.active {
+            border-color: var(--primary);
+            background: rgba(108, 99, 255, 0.1);
+        }
+
+        .game-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+        }
+
+        .game-card.active .game-icon {
+            background: var(--gradient);
+        }
+
+        .game-name {
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .find-button {
+            display: block;
+            margin: 40px auto 0;
+            padding: 16px 50px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .find-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .find-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Results */
+        .results {
+            margin: 80px 0;
+            display: none;
+        }
+
+        .results.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .results-title {
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .comparison-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--light);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .comparison-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .comparison-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--gradient);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .card-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .stars {
+            color: var(--gold);
+        }
+
+        .rating-value {
+            font-weight: 600;
+            margin-left: 5px;
+        }
+
+        .card-bonus {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-features {
+            margin-bottom: 25px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .feature i {
+            color: var(--accent);
+            font-size: 12px;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .card-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            text-align: center;
+        }
+
+        .card-btn.primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .card-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .card-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .compare-checkbox {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            transition: var(--transition);
+            appearance: none;
+            -webkit-appearance: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .compare-checkbox:checked {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .compare-checkbox:checked::after {
+            content: '✓';
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .compare-checkbox:hover {
+            border-color: var(--primary-light);
+        }
+
+        /* Comparison Modal */
+        .comparison-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .comparison-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .comparison-content {
+            background: var(--dark);
+            border-radius: var(--radius);
+            padding: 40px;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .comparison-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-table th {
+            font-weight: 600;
+            color: var(--gray);
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .comparison-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        /* Details Modal */
+        .details-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .details-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .details-content {
+            background: var(--dark);
+            border-radius: var(--radius);
+            padding: 40px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--primary);
+        }
+
+        /* Custom scrollbar for details modal */
+        .details-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .details-content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        .details-content::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        .details-content::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-light);
+        }
+
+        .details-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .details-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .details-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .details-badge {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .details-section {
+            margin-bottom: 25px;
+        }
+
+        .details-section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-light);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 8px;
+        }
+
+        .details-list {
+            list-style: none;
+        }
+
+        .details-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .details-list li:last-child {
+            border-bottom: none;
+        }
+
+        .details-label {
+            color: var(--gray);
+        }
+
+        .details-value {
+            font-weight: 500;
+        }
+
+        /* Wheel of Fortune */
+        .wheel-section {
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: var(--radius);
+            padding: 60px 40px;
+            margin: 80px 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .wheel-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto 40px;
+        }
+
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                #6C63FF 0deg 60deg,
+                #FF6584 60deg 120deg,
+                #00D2A8 120deg 180deg,
+                #FFD166 180deg 240deg,
+                #8B85FF 240deg 300deg,
+                #5A52D5 300deg 360deg
+            );
+            position: relative;
+            transition: transform 5s cubic-bezier(0.2, 0.8, 0.3, 1);
+            box-shadow: 0 0 0 10px rgba(26, 26, 46, 0.7), 0 0 30px rgba(108, 99, 255, 0.5);
+        }
+
+        .wheel-spin {
+            animation: spin 5s cubic-bezier(0.2, 0.8, 0.3, 1);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(2160deg); }
+        }
+
+        .wheel-pointer {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+            z-index: 10;
+        }
+
+        .wheel-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            background: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--light);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .wheel-labels {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .wheel-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: 0 0;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .wheel-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .wheel-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .wheel-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Prize Modal */
+        .prize-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .prize-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .prize-content {
+            background: var(--dark);
+            border-radius: var(--radius);
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--primary);
+        }
+
+        .prize-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .prize-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .prize-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .prize-description {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        .promo-code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px dashed var(--primary);
+        }
+
+        .promo-code-text {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--gold);
+        }
+
+        .prize-link {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 18px;
+            transition: var(--transition);
+            margin-top: 20px;
+        }
+
+        .prize-link:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(15, 15, 26, 0.9);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-description {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .footer-heading {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-link {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-link:hover {
+            color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .hero-title {
+                font-size: 48px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .cards-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 140px 0 60px;
+            }
+            
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .nav {
+                display: none;
+            }
+            
+            .constructor {
+                padding: 30px 20px;
+            }
+            
+            .options-grid, .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .deposit-values {
+                flex-direction: column;
+            }
+            
+            .wheel-container {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-crown"></i>
+                    EliteBonus
+                </div>
+                <nav class="nav">
+                    <a href="#home" class="nav-link">Главная</a>
+                    <a href="#offers" class="nav-link">Предложения</a>
+                    <a href="#comparison" class="nav-link">Сравнение</a>
+                    <a href="#wheel" class="nav-link">Колесо удачи</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1 class="hero-title">Находим <span class="highlight">эксклюзивные бонусы</span> с максимальной выгодой</h1>
+            <p class="hero-description"><strong>EliteBonus</strong> - это премиальный сервис подбора лучших предложений с уникальным функционалом сравнения, детальной аналитикой и ежедневными бонусами</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">342</div>
+                    <div class="stat-label">Проверенных предложения</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">96%</div>
+                    <div class="stat-label">Довольных клиентов</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Поддержка</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">15мин</div>
+                    <div class="stat-label">Среднее время вывода</div>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" style="padding: 16px 40px; font-size: 18px;" id="startSearchBtn">
+                <i class="fas fa-bolt"></i> Начать поиск выгоды
+            </button>
+        </div>
+    </section>
+
+    <!-- Constructor -->
+    <section class="constructor" id="offers">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">Персональный подбор</div>
+                <h2 class="section-title">Конструктор идеального предложения</h2>
+                <p class="hero-description">Ответьте на 3 вопроса и получите персональную подборку лучших предложений</p>
+            </div>
+            
+            <div class="steps">
+                <!-- Step 1 -->
+                <div class="step" id="step1">
+                    <div class="step-header">
+                        <div class="step-number active">1</div>
+                        <div class="step-title">Выберите тип бонуса</div>
+                    </div>
+                    <div class="options-grid">
+                        <div class="option-card active" data-step="1">
+                            <div class="option-icon">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <div class="option-title">Максимальный бонус</div>
+                            <div class="option-description">Наибольший процент пополнения и фриспины</div>
+                        </div>
+                        <div class="option-card" data-step="1">
+                            <div class="option-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="option-title">Безопасный вариант</div>
+                            <div class="option-description">Минимальные условия отыгрыша</div>
+                        </div>
+                        <div class="option-card" data-step="1">
+                            <div class="option-icon">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <div class="option-title">Без депозита</div>
+                            <div class="option-description">Начните без внесения средств</div>
+                        </div>
+                        <div class="option-card" data-step="1">
+                            <div class="option-icon">
+                                <i class="fas fa-cash-register"></i>
+                            </div>
+                            <div class="option-title">Кешбэк</div>
+                            <div class="option-description">Возврат части проигранных средств</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="step" id="step2">
+                    <div class="step-header">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Ваша сумма депозита</div>
+                    </div>
+                    <div class="deposit-values">
+                        <div class="deposit-value" data-value="0">
+                            <div class="deposit-amount">Без депозита</div>
+                            <div class="deposit-label">Начальный</div>
+                        </div>
+                        <div class="deposit-value" data-value="1000">
+                            <div class="deposit-amount">1 000 ₽</div>
+                            <div class="deposit-label">Стандарт</div>
+                        </div>
+                        <div class="deposit-value active" data-value="3000">
+                            <div class="deposit-amount">3 000 ₽</div>
+                            <div class="depартит-label">Премиум</div>
+                        </div>
+                        <div class="deposit-value" data-value="5000">
+                            <div class="deposit-amount">5 000 ₽</div>
+                            <div class="deposit-label">VIP</div>
+                        </div>
+                        <div class="deposit-value" data-value="10000">
+                            <div class="deposit-amount">10 000 ₽</div>
+                            <div class="deposit-label">Эксклюзив</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="step" id="step3">
+                    <div class="step-header">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Предпочтительные игры</div>
+                    </div>
+                    <div class="games-grid">
+                        <div class="game-card" data-step="3">
+                            <div class="game-icon">
+                                <i class="fas fa-dice"></i>
+                            </div>
+                            <div class="game-name">Слоты</div>
+                        </div>
+                        <div class="game-card" data-step="3">
+                            <div class="game-icon">
+                                <i class="fas fa-chess-queen"></i>
+                            </div>
+                            <div class="game-name">Настольные</div>
+                        </div>
+                        <div class="game-card" data-step="3">
+                            <div class="game-icon">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <div class="game-name">Live-игры</div>
+                        </div>
+                        <div class="game-card" data-step="3">
+                            <div class="game-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="game-name">Стратегии</div>
+                        </div>
+                        <div class="game-card" data-step="3">
+                            <div class="game-icon">
+                                <i class="fas fa-poker-chip"></i>
+                            </div>
+                            <div class="game-name">Покер</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="find-button" id="findButton">
+                    <i class="fas fa-search"></i> Найти лучшие предложения
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results -->
+    <section class="results" id="comparison">
+        <div class="container">
+            <div class="results-header">
+                <h2 class="results-title">Персональная подборка для вас</h2>
+                <div class="results-actions">
+                    <button class="comparison-btn" id="compareBtn" disabled>
+                        <i class="fas fa-balance-scale"></i> Сравнить выбранные
+                    </button>
+                    <button class="comparison-btn">
+                        <i class="fas fa-filter"></i> Фильтры
+                    </button>
+                </div>
+            </div>
+            
+            <div class="cards-grid" id="cardsContainer">
+                <!-- Cards will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Wheel of Fortune -->
+    <section class="wheel-section" id="wheel">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">Ежедневный бонус</div>
+                <h2 class="section-title">Колесо удачи</h2>
+                <p class="hero-description">Крутите колесо раз в сутки и получайте эксклюзивные промокоды и бонусы</p>
+            </div>
+            
+            <div class="wheel-container">
+                <div class="wheel" id="wheelElement">
+                    <div class="wheel-text">Крути меня!</div>
+                    <div class="wheel-labels" id="wheelLabels"></div>
+                </div>
+                <div class="wheel-pointer"></div>
+            </div>
+            
+            <button class="wheel-btn" id="spinButton">
+                <i class="fas fa-redo"></i> Крутить колесо
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">EliteBonus</div>
+                    <p class="footer-description">Премиальный сервис подбора лучших бонусов с уникальным функционалом сравнения, детальной аналитикой и ежедневными бонусами.</p>
+                </div>
+                
+                <div class="footer-nav">
+                    <h3 class="footer-heading">Навигация</h3>
+                    <div class="footer-links">
+                        <a href="#home" class="footer-link">Главная</a>
+                        <a href="#offers" class="footer-link">Предложения</a>
+                        <a href="#comparison" class="footer-link">Сравнение</a>
+                        <a href="#wheel" class="footer-link">Колесо удачи</a>
+                    </div>
+                </div>
+                
+                <div class="footer-legal">
+                    <h3 class="footer-heading">Правовая информация</h3>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Политика конфиденциальности</a>
+                        <a href="#" class="footer-link">Условия использования</a>
+                        <a href="#" class="footer-link">Ответственная игра</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2024 EliteBonus. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Comparison Modal -->
+    <div class="comparison-modal" id="comparisonModal">
+        <div class="comparison-content">
+            <button class="comparison-close" id="closeComparison">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 style="margin-bottom: 30px;">Сравнение выбранных предложений</h2>
+            <table class="comparison-table" id="comparisonTable">
+                <!-- Table content will be generated by JavaScript -->
+            </table>
+            <div class="comparison-actions" id="comparisonActions">
+                <!-- Claim buttons will be generated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Details Modal -->
+    <div class="details-modal" id="detailsModal">
+        <div class="details-content">
+            <button class="details-close" id="closeDetails">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="details-header">
+                <h2 class="details-title" id="detailsTitle">Vulkan Casino</h2>
+                <div class="details-badge" id="detailsBadge">Эксклюзив</div>
+            </div>
+            
+            <div class="details-section">
+                <h3 class="details-section-title">Основная информация</h3>
+                <ul class="details-list" id="detailsMain">
+                    <!-- Will be filled by JavaScript -->
+                </ul>
+            </div>
+            
+            <div class="details-section">
+                <h3 class="details-section-title">Условия бонуса</h3>
+                <ul class="details-list" id="detailsBonus">
+                    <!-- Will be filled by JavaScript -->
+                </ul>
+            </div>
+            
+            <div class="details-section">
+                <h3 class="details-section-title">Особенности</h3>
+                <ul class="details-list" id="detailsFeatures">
+                    <!-- Will be filled by JavaScript -->
+                </ul>
+            </div>
+            
+            <button class="card-btn primary" style="width: 100%; margin-top: 20px;" id="detailsClaimBtn">
+                <i class="fas fa-gift"></i> Забрать бонус
+            </button>
+        </div>
+    </div>
+
+    <!-- Prize Modal -->
+    <div class="prize-modal" id="prizeModal">
+        <div class="prize-content">
+            <button class="prize-close" id="closePrize">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="prize-icon">
+                <i class="fas fa-gift"></i>
+            </div>
+            <h2 class="prize-title" id="prizeTitle">Поздравляем!</h2>
+            <p class="prize-description" id="prizeDescription">Вы выиграли эксклюзивный бонус</p>
+            <div class="promo-code">
+                <div class="promo-code-text" id="promoCode">ELITE100</div>
+            </div>
+            <p>Используйте промокод при регистрации</p>
+            <a href="#" class="prize-link" id="prizeLink" target="_blank">
+                <i class="fas fa-external-link-alt"></i> Перейти к получению бонуса
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Constructor Logic
+        const steps = {
+            1: { completed: true, selected: null },
+            2: { completed: true, selected: null },
+            3: { completed: false, selected: null }
+        };
+
+        // Selected offers for comparison
+        let selectedOffers = [];
+
+        // Sample data for cards
+        const offers = [
+            {
+                id: 1,
+                title: "Vulkan Casino",
+                badge: "Эксклюзив",
+                rating: 4.8,
+                bonus: "+150% к депозиту + 100 фриспинов",
+                features: [
+                    "Вейджер x25",
+                    "Без ограничений по играм",
+                    "Вывод за 12 часов",
+                    "Без верификации"
+                ],
+                type: "deposit",
+                minDeposit: 500,
+                games: ["slots", "table"],
+                details: {
+                    wagering: "Вейджер x25",
+                    maxWin: "50 000 руб",
+                    validity: "7 дней",
+                    games: "Все слоты, кроме указанных",
+                    minDeposit: "500 руб",
+                    verification: "Не требуется",
+                    withdrawal: "12 часов"
+                },
+                link: "https://vulkan-casino.example.com"
+            },
+            {
+                id: 2,
+                title: "RoX Casino",
+                badge: "VIP",
+                rating: 4.6,
+                bonus: "200 фриспинов в Book of Dead",
+                features: [
+                    "Вейджер x30",
+                    "Макс. выигрыш 50 000 руб",
+                    "Без верификации",
+                    "Поддержка 24/7"
+                ],
+                type: "freespins",
+                minDeposit: 1000,
+                games: ["slots"],
+                details: {
+                    wagering: "Вейджер x30",
+                    maxWin: "50 000 руб",
+                    validity: "3 дня",
+                    games: "Только Book of Dead",
+                    minDeposit: "1000 руб",
+                    verification: "Не требуется",
+                    withdrawal: "24 часа"
+                },
+                link: "https://rox-casino.example.com"
+            },
+            {
+                id: 3,
+                title: "Play Fortuna",
+                badge: "Премиум",
+                rating: 4.9,
+                bonus: "15% кешбэк еженедельно",
+                features: [
+                    "На все проигрыши",
+                    "Без условий отыгрыша",
+                    "Мгновенное начисление",
+                    "Минимальный вывод 500 руб"
+                ],
+                type: "cashback",
+                minDeposit: 0,
+                games: ["slots", "table", "live"],
+                details: {
+                    wagering: "Без вейджера",
+                    maxWin: "Не ограничен",
+                    validity: "Постоянно",
+                    games: "Все игры",
+                    minDeposit: "Не требуется",
+                    verification: "Требуется",
+                    withdrawal: "6 часов"
+                },
+                link: "https://playfortuna.example.com"
+            }
+        ];
+
+        // Wheel prizes
+        const wheelPrizes = [
+            { 
+                text: "Промокод 100%", 
+                discount: "100% бонус на первый депозит", 
+                code: "ELITE100",
+                link: "https://vulkan-casino.example.com"
+            },
+            { 
+                text: "50 фриспинов", 
+                discount: "50 бесплатных вращений", 
+                code: "SPIN50",
+                link: "https://rox-casino.example.com"
+            },
+            { 
+                text: "Промокод 50%", 
+                discount: "50% бонус к пополнению", 
+                code: "ELITE50",
+                link: "https://playfortuna.example.com"
+            },
+            { 
+                text: "Кешбэк 15%", 
+                discount: "15% возврат проигранных средств", 
+                code: "CASH15",
+                link: "https://vulkan-casino.example.com"
+            },
+            { 
+                text: "Удвоение депозита", 
+                discount: "x2 к сумме пополнения", 
+                code: "DOUBLE",
+                link: "https://rox-casino.example.com"
+            },
+            { 
+                text: "Бонус 200%", 
+                discount: "200% к первому депозиту", 
+                code: "MEGA200",
+                link: "https://playfortuna.example.com"
+            }
+        ];
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeConstructor();
+            initializeWheel();
+            generateCards();
+            
+            // Start search button
+            document.getElementById('startSearchBtn').addEventListener('click', function() {
+                document.getElementById('offers').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Constructor functionality
+        function initializeConstructor() {
+            // Step 1 selection
+            document.querySelectorAll('#step1 .option-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    document.querySelectorAll('#step1 .option-card').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    steps[1].completed = true;
+                    steps[1].selected = this;
+                    activateStep2();
+                });
+            });
+
+            // Step 2 selection
+            document.querySelectorAll('#step2 .deposit-value').forEach(value => {
+                value.addEventListener('click', function() {
+                    document.querySelectorAll('#step2 .deposit-value').forEach(v => v.classList.remove('active'));
+                    this.classList.add('active');
+                    steps[2].completed = true;
+                    steps[2].selected = this;
+                    activateStep3();
+                });
+            });
+
+            // Step 3 selection
+            document.querySelectorAll('#step3 .game-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    steps[3].completed = document.querySelectorAll('#step3 .game-card.active').length > 0;
+                });
+            });
+            
+            // Find button
+            document.getElementById('findButton').addEventListener('click', function() {
+                const resultsSection = document.getElementById('comparison');
+                resultsSection.classList.add('active');
+                
+                // Scroll to results
+                setTimeout(() => {
+                    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 300);
+            });
+        }
+
+        function activateStep2() {
+            document.getElementById('step2').classList.remove('disabled');
+            document.querySelector('#step2 .step-number').classList.add('active');
+        }
+
+        function activateStep3() {
+            document.getElementById('step3').classList.remove('disabled');
+            document.querySelector('#step3 .step-number').classList.add('active');
+        }
+
+        // Generate cards
+        function generateCards() {
+            const container = document.getElementById('cardsContainer');
+            container.innerHTML = '';
+            
+            offers.forEach(offer => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <input type="checkbox" class="compare-checkbox" data-offer-id="${offer.id}" onchange="toggleOfferComparison(${offer.id})">
+                    <div class="card-badge">${offer.badge}</div>
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">${offer.title}</h3>
+                            <div class="card-rating">
+                                <div class="stars">
+                                    ${'<i class="fas fa-star"></i>'.repeat(Math.floor(offer.rating))}
+                                    ${offer.rating % 1 !== 0 ? '<i class="fas fa-star-half-alt"></i>' : ''}
+                                </div>
+                                <span class="rating-value">${offer.rating}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-bonus">${offer.bonus}</div>
+                    <div class="card-features">
+                        ${offer.features.map(feature => `
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>${feature}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="card-actions">
+                        <button class="card-btn primary" onclick="claimOffer(${offer.id})">
+                            <i class="fas fa-gift"></i> Забрать бонус
+                        </button>
+                        <button class="card-btn secondary" onclick="showDetails(${offer.id})">
+                            <i class="fas fa-info-circle"></i> Подробнее
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Toggle offer for comparison
+        window.toggleOfferComparison = function(offerId) {
+            const checkbox = document.querySelector(`.compare-checkbox[data-offer-id="${offerId}"]`);
+            const offer = offers.find(o => o.id === offerId);
+            
+            if (checkbox.checked) {
+                selectedOffers.push(offer);
+            } else {
+                selectedOffers = selectedOffers.filter(o => o.id !== offerId);
+            }
+            
+            // Update compare button state
+            const compareBtn = document.getElementById('compareBtn');
+            compareBtn.disabled = selectedOffers.length < 2;
+        };
+
+        // Show details modal
+        window.showDetails = function(id) {
+            const offer = offers.find(o => o.id === id);
+            
+            // Set modal content
+            document.getElementById('detailsTitle').textContent = offer.title;
+            document.getElementById('detailsBadge').textContent = offer.badge;
+            
+            // Main info
+            const mainList = document.getElementById('detailsMain');
+            mainList.innerHTML = `
+                <li><span class="details-label">Рейтинг:</span><span class="details-value">${offer.rating}/5</span></li>
+                <li><span class="details-label">Тип бонуса:</span><span class="details-value">${getBonusType(offer.type)}</span></li>
+                <li><span class="details-label">Мин. депозит:</span><span class="details-value">${offer.minDeposit === 0 ? 'Не требуется' : offer.minDeposit + ' руб'}</span></li>
+            `;
+            
+            // Bonus conditions
+            const bonusList = document.getElementById('detailsBonus');
+            bonusList.innerHTML = `
+                <li><span class="details-label">Вейджер:</span><span class="details-value">${offer.details.wagering}</span></li>
+                <li><span class="details-label">Макс. выигрыш:</span><span class="details-value">${offer.details.maxWin}</span></li>
+                <li><span class="details-label">Срок действия:</span><span class="details-value">${offer.details.validity}</span></li>
+                <li><span class="details-label">Доступные игры:</span><span class="details-value">${offer.details.games}</span></li>
+            `;
+            
+            // Features
+            const featuresList = document.getElementById('detailsFeatures');
+            featuresList.innerHTML = `
+                <li><span class="details-label">Верификация:</span><span class="details-value">${offer.details.verification}</span></li>
+                <li><span class="details-label">Вывод средств:</span><span class="details-value">${offer.details.withdrawal}</span></li>
+                <li><span class="details-label">Поддержка:</span><span class="details-value">24/7</span></li>
+            `;
+            
+            // Set claim button
+            document.getElementById('detailsClaimBtn').onclick = function() {
+                claimOffer(id);
+            };
+            
+            // Show modal
+            document.getElementById('detailsModal').classList.add('active');
+        };
+
+        // Close details modal
+        document.getElementById('closeDetails').addEventListener('click', function() {
+            document.getElementById('detailsModal').classList.remove('active');
+        });
+
+        function getBonusType(type) {
+            const types = {
+                'deposit': 'Депозитный бонус',
+                'freespins': 'Фриспины',
+                'cashback': 'Кешбэк',
+                'nodeposit': 'Бездепозитный',
+                'mixed': 'Комбинированный'
+            };
+            return types[type] || type;
+        }
+
+        // Wheel functionality
+        function initializeWheel() {
+            const wheel = document.getElementById('wheelElement');
+            const spinButton = document.getElementById('spinButton');
+            const wheelLabels = document.getElementById('wheelLabels');
+            let isSpinning = false;
+            
+            // Add labels to wheel
+            const labels = ['100%', '50 FS', '50%', '15%', 'x2', '200%'];
+            labels.forEach((label, index) => {
+                const angle = (index * 60) - 30;
+                const labelElement = document.createElement('div');
+                labelElement.className = 'wheel-label';
+                labelElement.textContent = label;
+                labelElement.style.transform = `rotate(${angle}deg) translate(140px) rotate(-${angle}deg)`;
+                wheelLabels.appendChild(labelElement);
+            });
+            
+            spinButton.addEventListener('click', function() {
+                if (isSpinning) return;
+                
+                isSpinning = true;
+                spinButton.disabled = true;
+                
+                // Random rotation between 2160 and 4320 degrees (6-12 full rotations)
+                const degrees = 2160 + Math.floor(Math.random() * 2160);
+                wheel.style.transform = `rotate(${degrees}deg)`;
+                
+                // Calculate prize
+                setTimeout(() => {
+                    const segment = 60; // 6 segments of 60 degrees each
+                    const actualDegrees = degrees % 360;
+                    const prizeIndex = Math.floor(((360 - actualDegrees) % 360) / segment);
+                    const prize = wheelPrizes[prizeIndex];
+                    
+                    // Show prize modal
+                    showPrizeModal(prize);
+                    
+                    isSpinning = false;
+                    spinButton.disabled = false;
+                }, 5000);
+            });
+        }
+
+        // Show prize modal
+        function showPrizeModal(prize) {
+            document.getElementById('prizeTitle').textContent = prize.text;
+            document.getElementById('prizeDescription').textContent = prize.discount;
+            document.getElementById('promoCode').textContent = prize.code;
+            document.getElementById('prizeLink').href = prize.link;
+            document.getElementById('prizeModal').classList.add('active');
+        }
+
+        // Close prize modal
+        document.getElementById('closePrize').addEventListener('click', function() {
+            document.getElementById('prizeModal').classList.remove('active');
+        });
+
+        // Comparison functionality
+        document.getElementById('compareBtn').addEventListener('click', function() {
+            if (selectedOffers.length < 2) return;
+            
+            document.getElementById('comparisonModal').classList.add('active');
+            generateComparisonTable();
+        });
+
+        document.getElementById('closeComparison').addEventListener('click', function() {
+            document.getElementById('comparisonModal').classList.remove('active');
+        });
+
+        function generateComparisonTable() {
+            const table = document.getElementById('comparisonTable');
+            const actions = document.getElementById('comparisonActions');
+            
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Параметр</th>
+                        ${selectedOffers.map(offer => `<th>${offer.title}</th>`).join('')}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Бонус</td>
+                        ${selectedOffers.map(offer => `<td>${offer.bonus}</td>`).join('')}
+                    </tr>
+                    <tr>
+                        <td>Рейтинг</td>
+                        ${selectedOffers.map(offer => `<td>${offer.rating}/5</td>`).join('')}
+                    </tr>
+                    <tr>
+                        <td>Мин. депозит</td>
+                        ${selectedOffers.map(offer => `<td>${offer.minDeposit === 0 ? 'Не требуется' : offer.minDeposit + ' руб'}</td>`).join('')}
+                    </tr>
+                    <tr>
+                        <td>Вейджер</td>
+                        ${selectedOffers.map(offer => `<td>${offer.details.wagering}</td>`).join('')}
+                    </tr>
+                    <tr>
+                        <td>Макс. выигрыш</td>
+                        ${selectedOffers.map(offer => `<td>${offer.details.maxWin}</td>`).join('')}
+                    </tr>
+                    <tr>
+                        <td>Действует</td>
+                        ${selectedOffers.map(offer => `<td>${offer.details.validity}</td>`).join('')}
+                    </tr>
+                    <tr>
+                        <td>Верификация</td>
+                        ${selectedOffers.map(offer => `<td>${offer.details.verification}</td>`).join('')}
+                    </tr>
+                    <tr>
+                        <td>Вывод</td>
+                        ${selectedOffers.map(offer => `<td>${offer.details.withdrawal}</td>`).join('')}
+                    </tr>
+                </tbody>
+            `;
+            
+            // Add claim buttons for each selected offer
+            actions.innerHTML = selectedOffers.map(offer => `
+                <button class="card-btn primary" onclick="claimOffer(${offer.id})">
+                    <i class="fas fa-gift"></i> Забрать ${offer.title}
+                </button>
+            `).join('');
+        }
+
+        // Global functions
+        window.claimOffer = function(id) {
+            const offer = offers.find(o => o.id === id);
+            window.open(offer.link, '_blank');
+        };
+    </script>
+</body>
+</html>
