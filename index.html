@@ -42,6 +42,7 @@
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
+            scroll-behavior: smooth;
         }
 
         .container {
@@ -50,9 +51,9 @@
             padding: 0 20px;
         }
 
-        /* Header */
+        /* Header - ИСПРАВЛЕННЫЙ */
         .header {
-            background: rgba(26, 26, 46, 0.5);
+            background: rgba(26, 26, 46, 0.95);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -68,6 +69,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
 
         .logo {
@@ -79,6 +81,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            text-decoration: none;
+            z-index: 1001;
         }
 
         .logo i {
@@ -116,6 +120,106 @@
 
         .nav-link:hover::after {
             width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: var(--dark);
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+            z-index: 1002;
+            padding: 80px 30px 30px;
+            transition: var(--transition);
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .mobile-nav-link {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 15px 20px;
+            border-radius: 12px;
+            transition: var(--transition);
+            display: block;
+        }
+
+        .mobile-nav-link:hover {
+            background: rgba(108, 99, 255, 0.1);
+            color: var(--primary-light);
+        }
+
+        .mobile-nav-close {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1003;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1001;
+            backdrop-filter: blur(5px);
+        }
+
+        .overlay.active {
+            display: block;
         }
 
         .btn {
@@ -226,6 +330,7 @@
             box-shadow: var(--shadow);
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
+            scroll-margin-top: 100px;
         }
 
         .section-header {
@@ -284,6 +389,7 @@
             font-size: 18px;
             font-weight: 700;
             color: var(--light);
+            flex-shrink: 0;
         }
 
         .step-number.active {
@@ -296,22 +402,28 @@
             font-weight: 600;
         }
 
+        /* Step 1 - Карточки без переносов */
         .options-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
         }
 
         .option-card {
-            padding: 24px;
+            padding: 20px 15px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             background: rgba(255, 255, 255, 0.05);
             cursor: pointer;
             transition: var(--transition);
-            text-align: left;
+            text-align: center;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 160px;
         }
 
         .option-card:hover {
@@ -328,7 +440,7 @@
         .option-icon {
             width: 50px;
             height: 50px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -343,16 +455,21 @@
         }
 
         .option-title {
-            font-size: 18px;
+            font-size: 16px;
             color: var(--light);
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
+            line-height: 1.2;
+            white-space: nowrap;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .option-description {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--gray);
-            line-height: 1.4;
+            line-height: 1.3;
         }
 
         .deposit-values {
@@ -407,6 +524,7 @@
             background: rgba(255, 255, 255, 0.05);
             cursor: pointer;
             transition: var(--transition);
+            position: relative;
         }
 
         .game-card:hover {
@@ -429,6 +547,7 @@
             font-size: 24px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 12px;
+            color: var(--light);
         }
 
         .game-card.active .game-icon {
@@ -472,6 +591,7 @@
         .results {
             margin: 80px 0;
             display: none;
+            scroll-margin-top: 100px;
         }
 
         .results.active {
@@ -484,6 +604,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
         .results-title {
@@ -507,6 +629,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            white-space: nowrap;
         }
 
         .comparison-btn:hover {
@@ -547,6 +670,7 @@
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 20px;
+            padding-right: 40px; /* Место для чекбокса */
         }
 
         .card-badge {
@@ -559,6 +683,7 @@
             border-radius: 20px;
             font-size: 12px;
             font-weight: 600;
+            z-index: 2;
         }
 
         .card-title {
@@ -645,10 +770,15 @@
             background: rgba(255, 255, 255, 0.15);
         }
 
-        .compare-checkbox {
+        /* Compare checkbox - ИСПРАВЛЕННЫЙ */
+        .compare-checkbox-wrapper {
             position: absolute;
             top: 20px;
             left: 20px;
+            z-index: 2;
+        }
+
+        .compare-checkbox {
             width: 24px;
             height: 24px;
             border-radius: 6px;
@@ -661,6 +791,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
 
         .compare-checkbox:checked {
@@ -673,10 +804,18 @@
             color: white;
             font-weight: bold;
             font-size: 14px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .compare-checkbox:hover {
             border-color: var(--primary-light);
+        }
+
+        .compare-checkbox:checked:hover {
+            border-color: var(--primary);
         }
 
         /* Comparison Modal */
@@ -722,6 +861,17 @@
             color: var(--light);
             font-size: 24px;
             cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .comparison-close:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .comparison-table {
@@ -749,6 +899,7 @@
             display: flex;
             gap: 15px;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         /* Details Modal */
@@ -786,7 +937,6 @@
             border: 2px solid var(--primary);
         }
 
-        /* Custom scrollbar for details modal */
         .details-content::-webkit-scrollbar {
             width: 8px;
         }
@@ -814,6 +964,17 @@
             color: var(--light);
             font-size: 24px;
             cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .details-close:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .details-header {
@@ -886,52 +1047,32 @@
             text-align: center;
             box-shadow: var(--shadow);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            scroll-margin-top: 100px;
         }
 
         .wheel-container {
             position: relative;
-            width: 400px;
-            height: 400px;
+            width: 100%;
+            max-width: 500px;
             margin: 0 auto 40px;
         }
 
         .wheel {
             width: 100%;
-            height: 100%;
+            padding-bottom: 100%; /* Maintain 1:1 aspect ratio */
             border-radius: 50%;
-            background: conic-gradient(
-                from 0deg,
-                #6C63FF 0deg 60deg,
-                #FF6584 60deg 120deg,
-                #00D2A8 120deg 180deg,
-                #FFD166 180deg 240deg,
-                #8B85FF 240deg 300deg,
-                #5A52D5 300deg 360deg
-            );
             position: relative;
+            overflow: hidden;
             transition: transform 5s cubic-bezier(0.2, 0.8, 0.3, 1);
             box-shadow: 0 0 0 10px rgba(26, 26, 46, 0.7), 0 0 30px rgba(108, 99, 255, 0.5);
         }
 
-        .wheel-spin {
-            animation: spin 5s cubic-bezier(0.2, 0.8, 0.3, 1);
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(2160deg); }
-        }
-
-        .wheel-pointer {
+        .wheel-svg {
             position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 40px;
-            background: var(--gradient);
-            clip-path: polygon(50% 100%, 0 0, 100% 0);
-            z-index: 10;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
 
         .wheel-text {
@@ -939,8 +1080,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             background: var(--dark);
             border-radius: 50%;
             display: flex;
@@ -950,6 +1091,19 @@
             font-size: 18px;
             color: var(--light);
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .wheel-pointer {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: var(--gradient);
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+            z-index: 10;
         }
 
         .wheel-labels {
@@ -959,6 +1113,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
+            z-index: 1;
         }
 
         .wheel-label {
@@ -967,9 +1122,13 @@
             left: 50%;
             transform-origin: 0 0;
             color: white;
-            font-weight: 600;
-            font-size: 14px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            font-weight: 700;
+            font-size: 12px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            z-index: 1;
+            text-align: center;
+            width: 60px;
+            margin-left: -30px;
         }
 
         .wheel-btn {
@@ -1040,6 +1199,17 @@
             color: var(--light);
             font-size: 24px;
             cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .prize-close:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .prize-icon {
@@ -1168,6 +1338,11 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(2160deg); }
+        }
+
         .card {
             animation: fadeIn 0.5s ease;
         }
@@ -1185,9 +1360,23 @@
             .cards-grid {
                 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             }
+            
+            .wheel-container {
+                max-width: 400px;
+            }
+            
+            .wheel-label {
+                font-size: 11px;
+                width: 50px;
+                margin-left: -25px;
+            }
+            
+            .options-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             .hero {
                 padding: 140px 0 60px;
             }
@@ -1196,29 +1385,182 @@
                 font-size: 36px;
             }
             
+            .hero-description {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .constructor {
+                padding: 30px;
+            }
+            
+            .wheel-container {
+                max-width: 350px;
+            }
+            
+            .wheel-text {
+                width: 80px;
+                height: 80px;
+                font-size: 16px;
+            }
+            
+            .wheel-label {
+                font-size: 10px;
+                width: 45px;
+                margin-left: -22.5px;
+            }
+        }
+
+        @media (max-width: 768px) {
             .nav {
                 display: none;
             }
             
-            .constructor {
-                padding: 30px 20px;
+            .mobile-menu-btn {
+                display: flex;
             }
             
-            .options-grid, .games-grid {
+            .hero-stats {
+                gap: 30px;
+            }
+            
+            .stat-number {
+                font-size: 32px;
+            }
+            
+            .options-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .deposit-values {
                 flex-direction: column;
+                gap: 15px;
+            }
+            
+            .results-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            
+            .results-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .comparison-table {
+                font-size: 14px;
+            }
+            
+            .comparison-table th, .comparison-table td {
+                padding: 10px;
+            }
+            
+            .comparison-actions {
+                flex-direction: column;
+            }
+            
+            .wheel-section {
+                padding: 40px 20px;
+                margin: 60px 0;
             }
             
             .wheel-container {
-                width: 300px;
-                height: 300px;
+                max-width: 300px;
+            }
+            
+            .wheel-label {
+                font-size: 9px;
+                width: 40px;
+                margin-left: -20px;
             }
             
             .footer-content {
                 grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .details-content, .prize-content, .comparison-content {
+                padding: 25px;
+            }
+            
+            .card-header {
+                padding-right: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 28px;
+            }
+            
+            .hero-description {
+                font-size: 16px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .step-title {
+                font-size: 20px;
+            }
+            
+            .constructor {
+                padding: 20px;
+            }
+            
+            .stat {
+                min-width: calc(50% - 15px);
+            }
+            
+            .card-actions {
+                flex-direction: column;
+            }
+            
+            .wheel-container {
+                max-width: 280px;
+            }
+            
+            .wheel-text {
+                width: 70px;
+                height: 70px;
+                font-size: 14px;
+            }
+            
+            .wheel-label {
+                font-size: 8px;
+                width: 35px;
+                margin-left: -17.5px;
+            }
+            
+            .wheel-btn {
+                padding: 14px 30px;
+                font-size: 16px;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-header {
+                padding-right: 25px;
             }
         }
     </style>
@@ -1228,19 +1570,36 @@
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <div class="logo">
+                <a href="#home" class="logo">
                     <i class="fas fa-crown"></i>
                     EliteBonus
-                </div>
+                </a>
                 <nav class="nav">
                     <a href="#home" class="nav-link">Главная</a>
                     <a href="#offers" class="nav-link">Предложения</a>
-                    <a href="#comparison" class="nav-link">Сравнение</a>
                     <a href="#wheel" class="nav-link">Колесо удачи</a>
                 </nav>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
     </header>
+
+    <!-- Overlay for mobile menu -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <button class="mobile-nav-close" id="mobileNavClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="mobile-nav-links">
+            <a href="#home" class="mobile-nav-link">Главная</a>
+            <a href="#offers" class="mobile-nav-link">Предложения</a>
+            <a href="#wheel" class="mobile-nav-link">Колесо удачи</a>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -1338,7 +1697,7 @@
                         </div>
                         <div class="deposit-value active" data-value="3000">
                             <div class="deposit-amount">3 000 ₽</div>
-                            <div class="depартит-label">Премиум</div>
+                            <div class="deposit-label">Премиум</div>
                         </div>
                         <div class="deposit-value" data-value="5000">
                             <div class="deposit-amount">5 000 ₽</div>
@@ -1384,7 +1743,7 @@
                         </div>
                         <div class="game-card" data-step="3">
                             <div class="game-icon">
-                                <i class="fas fa-poker-chip"></i>
+                                <i class="fas fa-spade"></i>
                             </div>
                             <div class="game-name">Покер</div>
                         </div>
@@ -1407,9 +1766,6 @@
                     <button class="comparison-btn" id="compareBtn" disabled>
                         <i class="fas fa-balance-scale"></i> Сравнить выбранные
                     </button>
-                    <button class="comparison-btn">
-                        <i class="fas fa-filter"></i> Фильтры
-                    </button>
                 </div>
             </div>
             
@@ -1430,6 +1786,7 @@
             
             <div class="wheel-container">
                 <div class="wheel" id="wheelElement">
+                    <svg class="wheel-svg" viewBox="0 0 100 100" id="wheelSvg"></svg>
                     <div class="wheel-text">Крути меня!</div>
                     <div class="wheel-labels" id="wheelLabels"></div>
                 </div>
@@ -1456,7 +1813,6 @@
                     <div class="footer-links">
                         <a href="#home" class="footer-link">Главная</a>
                         <a href="#offers" class="footer-link">Предложения</a>
-                        <a href="#comparison" class="footer-link">Сравнение</a>
                         <a href="#wheel" class="footer-link">Колесо удачи</a>
                     </div>
                 </div>
@@ -1648,54 +2004,154 @@
         // Wheel prizes
         const wheelPrizes = [
             { 
-                text: "Промокод 100%", 
-                discount: "100% бонус на первый депозит", 
+                text: "100% БОНУС", 
+                label: "100%<br>БОНУС",
+                color: "#6C63FF",
+                discount: "100% бонус на первый депозит в Vulkan Casino", 
                 code: "ELITE100",
-                link: "https://vulkan-casino.example.com"
+                description: "Получите удвоение вашего первого депозита до 10 000 рублей",
+                link: "https://vulkan-casino.example.com",
+                casino: "Vulkan Casino",
+                type: "Депозитный бонус"
             },
             { 
-                text: "50 фриспинов", 
-                discount: "50 бесплатных вращений", 
+                text: "50 ФРИСПИНОВ", 
+                label: "50<br>ФРИСПИНОВ",
+                color: "#FF6584",
+                discount: "50 бесплатных вращений в RoX Casino", 
                 code: "SPIN50",
-                link: "https://rox-casino.example.com"
+                description: "50 фриспинов в популярном слоте Book of Dead",
+                link: "https://rox-casino.example.com",
+                casino: "RoX Casino",
+                type: "Фриспины"
             },
             { 
-                text: "Промокод 50%", 
-                discount: "50% бонус к пополнению", 
+                text: "50% БОНУС", 
+                label: "50%<br>БОНУС",
+                color: "#00D2A8",
+                discount: "50% бонус к пополнению в Play Fortuna", 
                 code: "ELITE50",
-                link: "https://playfortuna.example.com"
+                description: "Получите дополнительно 50% к любому депозиту",
+                link: "https://playfortuna.example.com",
+                casino: "Play Fortuna",
+                type: "Депозитный бонус"
             },
             { 
-                text: "Кешбэк 15%", 
+                text: "15% КЕШБЭК", 
+                label: "15%<br>КЕШБЭК",
+                color: "#FFD166",
                 discount: "15% возврат проигранных средств", 
                 code: "CASH15",
-                link: "https://vulkan-casino.example.com"
+                description: "Еженедельный кешбэк 15% от всех проигрышей",
+                link: "https://vulkan-casino.example.com",
+                casino: "Vulkan Casino",
+                type: "Кешбэк"
             },
             { 
-                text: "Удвоение депозита", 
-                discount: "x2 к сумме пополнения", 
+                text: "УДВОЕНИЕ", 
+                label: "УДВОЕНИЕ<br>ДЕПОЗИТА",
+                color: "#8B85FF",
+                discount: "Удвоение первого депозита", 
                 code: "DOUBLE",
-                link: "https://rox-casino.example.com"
+                description: "Ваш первый депозит будет удвоен до 5 000 рублей",
+                link: "https://rox-casino.example.com",
+                casino: "RoX Casino",
+                type: "Депозитный бонус"
             },
             { 
-                text: "Бонус 200%", 
+                text: "200% БОНУС", 
+                label: "200%<br>БОНУС",
+                color: "#5A52D5",
                 discount: "200% к первому депозиту", 
                 code: "MEGA200",
-                link: "https://playfortuna.example.com"
+                description: "Получите тройную сумму вашего первого депозита",
+                link: "https://playfortuna.example.com",
+                casino: "Play Fortuna",
+                type: "Депозитный бонус"
             }
         ];
+
+        // Mobile navigation elements
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavClose = document.getElementById('mobileNavClose');
+        const overlay = document.getElementById('overlay');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
             initializeConstructor();
             initializeWheel();
             generateCards();
+            setupMobileNav();
             
             // Start search button
             document.getElementById('startSearchBtn').addEventListener('click', function() {
                 document.getElementById('offers').scrollIntoView({ behavior: 'smooth' });
             });
         });
+
+        // Mobile navigation setup - ИСПРАВЛЕННАЯ версия
+        function setupMobileNav() {
+            // Открытие меню
+            mobileMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openMobileMenu();
+            });
+
+            // Закрытие меню при клике на крестик
+            mobileNavClose.addEventListener('click', function(e) {
+                e.stopPropagation();
+                closeMobileMenu();
+            });
+
+            // Закрытие меню при клике на оверлей
+            overlay.addEventListener('click', function(e) {
+                e.stopPropagation();
+                closeMobileMenu();
+            });
+
+            // Закрытие меню при клике на ссылку
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    closeMobileMenu();
+                    
+                    // Прокрутка к нужному разделу
+                    setTimeout(() => {
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }, 300);
+                });
+            });
+
+            // Закрытие меню при нажатии Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+                    closeMobileMenu();
+                }
+            });
+
+            // Предотвращаем клик внутри меню от закрытия
+            mobileNav.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        }
+
+        function openMobileMenu() {
+            mobileNav.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileNav.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
 
         // Constructor functionality
         function initializeConstructor() {
@@ -1751,7 +2207,7 @@
             document.querySelector('#step3 .step-number').classList.add('active');
         }
 
-        // Generate cards
+        // Generate cards - ИСПРАВЛЕННАЯ версия с правильным чекбоксом
         function generateCards() {
             const container = document.getElementById('cardsContainer');
             container.innerHTML = '';
@@ -1760,7 +2216,9 @@
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
-                    <input type="checkbox" class="compare-checkbox" data-offer-id="${offer.id}" onchange="toggleOfferComparison(${offer.id})">
+                    <div class="compare-checkbox-wrapper">
+                        <input type="checkbox" class="compare-checkbox" data-offer-id="${offer.id}" onchange="toggleOfferComparison(${offer.id})">
+                    </div>
                     <div class="card-badge">${offer.badge}</div>
                     <div class="card-header">
                         <div>
@@ -1848,15 +2306,16 @@
             // Set claim button
             document.getElementById('detailsClaimBtn').onclick = function() {
                 claimOffer(id);
+                closeModal('detailsModal');
             };
             
             // Show modal
-            document.getElementById('detailsModal').classList.add('active');
+            openModal('detailsModal');
         };
 
         // Close details modal
         document.getElementById('closeDetails').addEventListener('click', function() {
-            document.getElementById('detailsModal').classList.remove('active');
+            closeModal('detailsModal');
         });
 
         function getBonusType(type) {
@@ -1873,19 +2332,76 @@
         // Wheel functionality
         function initializeWheel() {
             const wheel = document.getElementById('wheelElement');
+            const wheelSvg = document.getElementById('wheelSvg');
             const spinButton = document.getElementById('spinButton');
             const wheelLabels = document.getElementById('wheelLabels');
             let isSpinning = false;
             
-            // Add labels to wheel
-            const labels = ['100%', '50 FS', '50%', '15%', 'x2', '200%'];
-            labels.forEach((label, index) => {
-                const angle = (index * 60) - 30;
-                const labelElement = document.createElement('div');
-                labelElement.className = 'wheel-label';
-                labelElement.textContent = label;
-                labelElement.style.transform = `rotate(${angle}deg) translate(140px) rotate(-${angle}deg)`;
-                wheelLabels.appendChild(labelElement);
+            // Clear existing content
+            wheelSvg.innerHTML = '';
+            wheelLabels.innerHTML = '';
+            
+            // Create wheel segments with SVG
+            const svgNS = "http://www.w3.org/2000/svg";
+            const centerX = 50;
+            const centerY = 50;
+            const radius = 48;
+            
+            // Create 6 equal segments (60 degrees each)
+            wheelPrizes.forEach((prize, index) => {
+                const startAngle = index * 60;
+                const endAngle = (index + 1) * 60;
+                
+                // Convert angles to radians
+                const startRad = (startAngle - 90) * Math.PI / 180;
+                const endRad = (endAngle - 90) * Math.PI / 180;
+                
+                // Calculate points for the arc
+                const x1 = centerX + radius * Math.cos(startRad);
+                const y1 = centerY + radius * Math.sin(startRad);
+                const x2 = centerX + radius * Math.cos(endRad);
+                const y2 = centerY + radius * Math.sin(endRad);
+                
+                // Large arc flag
+                const largeArc = 0;
+                
+                // Create path for segment
+                const path = document.createElementNS(svgNS, "path");
+                const d = `M ${centerX} ${centerY} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2} Z`;
+                path.setAttribute("d", d);
+                path.setAttribute("fill", prize.color);
+                path.setAttribute("stroke", "rgba(255, 255, 255, 0.1)");
+                path.setAttribute("stroke-width", "0.5");
+                wheelSvg.appendChild(path);
+                
+                // Add text label for each segment
+                const labelAngle = (startAngle + endAngle) / 2;
+                const labelRad = (labelAngle - 90) * Math.PI / 180;
+                const labelDistance = 30; // Distance from center for text
+                const labelX = centerX + labelDistance * Math.cos(labelRad);
+                const labelY = centerY + labelDistance * Math.sin(labelRad);
+                
+                const text = document.createElementNS(svgNS, "text");
+                text.setAttribute("x", labelX);
+                text.setAttribute("y", labelY);
+                text.setAttribute("text-anchor", "middle");
+                text.setAttribute("dominant-baseline", "middle");
+                text.setAttribute("fill", "white");
+                text.setAttribute("font-weight", "bold");
+                text.setAttribute("font-size", "4");
+                text.setAttribute("transform", `rotate(${labelAngle}, ${labelX}, ${labelY})`);
+                
+                // Split text by <br> tags
+                const lines = prize.label.split('<br>');
+                lines.forEach((line, lineIndex) => {
+                    const tspan = document.createElementNS(svgNS, "tspan");
+                    tspan.setAttribute("x", labelX);
+                    tspan.setAttribute("dy", lineIndex === 0 ? "0" : "1.2em");
+                    tspan.textContent = line;
+                    text.appendChild(tspan);
+                });
+                
+                wheelSvg.appendChild(text);
             });
             
             spinButton.addEventListener('click', function() {
@@ -1900,9 +2416,9 @@
                 
                 // Calculate prize
                 setTimeout(() => {
-                    const segment = 60; // 6 segments of 60 degrees each
+                    const segment = 60;
                     const actualDegrees = degrees % 360;
-                    const prizeIndex = Math.floor(((360 - actualDegrees) % 360) / segment);
+                    const prizeIndex = Math.floor(((360 - actualDegrees + 30) % 360) / segment);
                     const prize = wheelPrizes[prizeIndex];
                     
                     // Show prize modal
@@ -1917,27 +2433,32 @@
         // Show prize modal
         function showPrizeModal(prize) {
             document.getElementById('prizeTitle').textContent = prize.text;
-            document.getElementById('prizeDescription').textContent = prize.discount;
+            document.getElementById('prizeDescription').innerHTML = `
+                <strong>${prize.casino}</strong><br>
+                ${prize.description}<br><br>
+                <small>Промокод: <strong>${prize.code}</strong></small>
+            `;
             document.getElementById('promoCode').textContent = prize.code;
             document.getElementById('prizeLink').href = prize.link;
-            document.getElementById('prizeModal').classList.add('active');
+            
+            openModal('prizeModal');
         }
 
         // Close prize modal
         document.getElementById('closePrize').addEventListener('click', function() {
-            document.getElementById('prizeModal').classList.remove('active');
+            closeModal('prizeModal');
         });
 
         // Comparison functionality
         document.getElementById('compareBtn').addEventListener('click', function() {
             if (selectedOffers.length < 2) return;
             
-            document.getElementById('comparisonModal').classList.add('active');
+            openModal('comparisonModal');
             generateComparisonTable();
         });
 
         document.getElementById('closeComparison').addEventListener('click', function() {
-            document.getElementById('comparisonModal').classList.remove('active');
+            closeModal('comparisonModal');
         });
 
         function generateComparisonTable() {
@@ -1994,6 +2515,37 @@
                 </button>
             `).join('');
         }
+
+        // Modal helper functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modals on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal('detailsModal');
+                closeModal('prizeModal');
+                closeModal('comparisonModal');
+            }
+        });
+
+        // Close modals when clicking outside
+        document.querySelectorAll('.details-modal, .prize-modal, .comparison-modal').forEach(modal => {
+            modal.addEventListener('click', function(event) {
+                if (event.target === this) {
+                    closeModal(this.id);
+                }
+            });
+        });
 
         // Global functions
         window.claimOffer = function(id) {
