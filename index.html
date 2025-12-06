@@ -1842,7 +1842,7 @@
                     </div>
                     <div class="deposit-values">
                         <div class="deposit-value" data-value="0">
-                            <div class="deposit-amount">До 500₽</div>
+                            <div class="deposit-amount">Без депозита</div>
                             <div class="deposit-label">Начальный</div>
                         </div>
                         <div class="deposit-value" data-value="1000">
@@ -2095,7 +2095,8 @@
                     verification: "Требуется",
                     withdrawal: "5-15 минут",
                     speed: "Экспресс-вывод",
-                    risk: "Низкий"
+                    risk: "Низкий",
+                    website: "https://beefcasino26.com/"
                 },
                 link: "https://bttrc.ru/go/spbjptxpva"
             },
@@ -2124,7 +2125,8 @@
                     verification: "Требуется",
                     withdrawal: "10-20 минут",
                     speed: "Быстрый вывод",
-                    risk: "Низкий"
+                    risk: "Низкий",
+                    website: "https://melbet-664792.pro/"
                 },
                 link: "https://bttrc.ru/go/s3g8x82qqi"
             },
@@ -2153,7 +2155,8 @@
                     verification: "Требуется",
                     withdrawal: "15-30 минут",
                     speed: "Стандартный вывод",
-                    risk: "Низкий"
+                    risk: "Низкий",
+                    website: "https://rtk-nrfbt-131.com/"
                 },
                 link: "https://bttrc.ru/go/slxlrrhbfk"
             },
@@ -2182,7 +2185,8 @@
                     verification: "Требуется",
                     withdrawal: "5-10 минут",
                     speed: "Супербыстрый вывод",
-                    risk: "Низкий"
+                    risk: "Низкий",
+                    website: "https://jet283.casino/"
                 },
                 link: "https://bttrc.ru/go/s52s5n5qym"
             },
@@ -2211,7 +2215,8 @@
                     verification: "Требуется",
                     withdrawal: "10-25 минут",
                     speed: "Быстрый вывод",
-                    risk: "Средний"
+                    risk: "Средний",
+                    website: "https://casinoflagman2.com/"
                 },
                 link: "https://bttrc.ru/go/s8po2l4f8z"
             },
@@ -2240,7 +2245,8 @@
                     verification: "Требуется",
                     withdrawal: "15-40 минут",
                     speed: "Стандартный вывод",
-                    risk: "Низкий"
+                    risk: "Низкий",
+                    website: "https://lev-field.top/"
                 },
                 link: "https://bttrc.ru/go/se0v5pfjcq"
             },
@@ -2269,7 +2275,8 @@
                     verification: "Требуется",
                     withdrawal: "30-60 минут",
                     speed: "Стандартный вывод",
-                    risk: "Низкий"
+                    risk: "Низкий",
+                    website: "https://7k465.casino/"
                 },
                 link: "https://bttrc.ru/go/sxy9ja32wo"
             }
@@ -2553,7 +2560,7 @@
             paginationContainer.innerHTML = paginationHTML;
         }
 
-        // Функция смены страницы
+        // Функция смены страницы (убрана прокрутка)
         window.changePage = function(page) {
             const totalPages = Math.ceil(filteredOffers.length / offersPerPage);
             
@@ -2564,12 +2571,7 @@
             currentPage = page;
             generateCardsForCurrentPage();
             generatePagination();
-            
-            // Прокрутка к началу карточек
-            document.getElementById('cardsContainer').scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'start' 
-            });
+            // Убрана строка с прокруткой, чтобы не было скачков экрана
         };
 
         // Генерация карточек для текущей страницы
@@ -2726,6 +2728,7 @@
                 <li><span class="details-label">Тип бонуса:</span><span class="details-value">${getBonusType(offer.bonusType)}</span></li>
                 <li><span class="details-label">Мин. депозит:</span><span class="details-value">${offer.minDeposit === 0 ? 'Не требуется' : offer.minDeposit + ' руб'}</span></li>
                 <li><span class="details-label">Вывод средств:</span><span class="details-value">${offer.details.withdrawal}</span></li>
+                <li><span class="details-label">Основной сайт:</span><span class="details-value"><a href="${offer.details.website}" target="_blank" style="color: var(--primary-light);">${offer.details.website}</a></span></li>
             `;
             
             // Bonus conditions
