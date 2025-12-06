@@ -708,11 +708,25 @@
             cursor: not-allowed;
         }
 
+        /* Cards Grid - ОБНОВЛЕНО: 3 карточки по центру */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
             margin-bottom: 40px;
+            justify-items: center;
+        }
+
+        @media (max-width: 1200px) {
+            .cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
@@ -723,6 +737,7 @@
             }
         }
 
+        /* Карточка с фиксированной шириной для ровного отображения */
         .card {
             background: rgba(26, 26, 46, 0.7);
             border-radius: var(--radius);
@@ -732,11 +747,18 @@
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+            width: 100%;
+            max-width: 380px;
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
         }
 
         @media (max-width: 768px) {
             .card {
                 padding: 20px;
+                max-width: 100%;
+                min-height: auto;
             }
         }
 
@@ -815,6 +837,7 @@
 
         .card-features {
             margin-bottom: 20px;
+            flex-grow: 1;
         }
 
         .feature {
@@ -833,6 +856,7 @@
         .card-actions {
             display: flex;
             gap: 10px;
+            margin-top: auto;
         }
 
         @media (max-width: 768px) {
@@ -919,6 +943,52 @@
 
         .compare-checkbox:checked:hover {
             border-color: var(--primary);
+        }
+
+        /* Пагинация - ДОБАВЛЕНО */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .page-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--light);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .page-btn:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary);
+        }
+
+        .page-btn.active {
+            background: var(--gradient);
+            border-color: transparent;
+            color: white;
+        }
+
+        .page-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .page-dots {
+            color: var(--gray);
+            font-size: 14px;
         }
 
         /* Comparison Modal */
@@ -1493,11 +1563,15 @@
             }
             
             .cards-grid {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                grid-template-columns: repeat(3, 1fr);
             }
             
             .options-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .card {
+                max-width: 100%;
             }
         }
 
@@ -1520,6 +1594,10 @@
             
             .section-title {
                 font-size: 30px;
+            }
+            
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -1593,6 +1671,10 @@
             
             .wheel-container {
                 max-width: 280px;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1721,28 +1803,28 @@
                         <div class="step-title">Выберите тип бонуса</div>
                     </div>
                     <div class="options-grid">
-                        <div class="option-card active" data-step="1">
+                        <div class="option-card active" data-step="1" data-value="maxbonus">
                             <div class="option-icon">
                                 <i class="fas fa-gem"></i>
                             </div>
                             <div class="option-title">Максимальный бонус</div>
                             <div class="option-description">Наибольший процент пополнения</div>
                         </div>
-                        <div class="option-card" data-step="1">
+                        <div class="option-card" data-step="1" data-value="safe">
                             <div class="option-icon">
                                 <i class="fas fa-shield-alt"></i>
                             </div>
                             <div class="option-title">Безопасный вариант</div>
                             <div class="option-description">Минимальные условия отыгрыша</div>
                         </div>
-                        <div class="option-card" data-step="1">
+                        <div class="option-card" data-step="1" data-value="nodeposit">
                             <div class="option-icon">
                                 <i class="fas fa-coins"></i>
                             </div>
                             <div class="option-title">Без депозита</div>
                             <div class="option-description">Начните без внесения средств</div>
                         </div>
-                        <div class="option-card" data-step="1">
+                        <div class="option-card" data-step="1" data-value="cashback">
                             <div class="option-icon">
                                 <i class="fas fa-cash-register"></i>
                             </div>
@@ -1760,7 +1842,7 @@
                     </div>
                     <div class="deposit-values">
                         <div class="deposit-value" data-value="0">
-                            <div class="deposit-amount">Без депозита</div>
+                            <div class="deposit-amount">До 500₽</div>
                             <div class="deposit-label">Начальный</div>
                         </div>
                         <div class="deposit-value" data-value="1000">
@@ -1785,25 +1867,25 @@
                         <div class="step-title">Предпочтительные игры</div>
                     </div>
                     <div class="games-grid">
-                        <div class="game-card" data-step="3">
+                        <div class="game-card" data-step="3" data-value="slots">
                             <div class="game-icon">
                                 <i class="fas fa-dice"></i>
                             </div>
                             <div class="game-name">Слоты</div>
                         </div>
-                        <div class="game-card" data-step="3">
+                        <div class="game-card" data-step="3" data-value="table">
                             <div class="game-icon">
                                 <i class="fas fa-chess-queen"></i>
                             </div>
                             <div class="game-name">Настольные</div>
                         </div>
-                        <div class="game-card" data-step="3">
+                        <div class="game-card" data-step="3" data-value="live">
                             <div class="game-icon">
                                 <i class="fas fa-video"></i>
                             </div>
                             <div class="game-name">Live-игры</div>
                         </div>
-                        <div class="game-card" data-step="3">
+                        <div class="game-card" data-step="3" data-value="strategy">
                             <div class="game-icon">
                                 <i class="fas fa-chart-line"></i>
                             </div>
@@ -1833,6 +1915,11 @@
             
             <div class="cards-grid" id="cardsContainer">
                 <!-- Cards will be generated by JavaScript -->
+            </div>
+            
+            <!-- Пагинация - ДОБАВЛЕНО -->
+            <div class="pagination" id="pagination" style="display: none;">
+                <!-- Пагинация будет сгенерирована JavaScript -->
             </div>
         </div>
     </section>
@@ -1917,7 +2004,7 @@
                 <i class="fas fa-times"></i>
             </button>
             <div class="details-header">
-                <h2 class="details-title" id="detailsTitle">Vulkan Casino</h2>
+                <h2 class="details-title" id="detailsTitle">Beef Casino</h2>
                 <div class="details-badge" id="detailsBadge">Эксклюзив</div>
             </div>
             
@@ -1968,145 +2055,275 @@
     <script>
         // Constructor Logic
         const steps = {
-            1: { completed: true, selected: null },
-            2: { completed: true, selected: null },
-            3: { completed: false, selected: null }
+            1: { completed: true, selected: 'maxbonus' },
+            2: { completed: true, selected: '3000' },
+            3: { completed: false, selected: [] }
         };
 
         // Selected offers for comparison
         let selectedOffers = [];
 
-        // Sample data for cards
+        // Пагинация
+        let currentPage = 1;
+        const offersPerPage = 3;
+        let filteredOffers = [];
+
+        // РЕАЛЬНЫЕ ДАННЫЕ ОФФЕРОВ с ваших сайтов
         const offers = [
             {
                 id: 1,
-                title: "Vulkan Casino",
+                title: "Beef Casino",
                 badge: "Эксклюзив",
                 rating: 4.8,
-                bonus: "+150% к депозиту",
+                bonus: "200% + 100 фриспинов",
                 features: [
-                    "Вейджер x25",
-                    "Без ограничений по играм",
-                    "Вывод за 12 часов",
-                    "Без верификации"
+                    "Минимальный депозит: 100₽",
+                    "Вывод средств: 5-15 мин",
+                    "Верификация: Есть",
+                    "Вейджер: x25"
                 ],
                 type: "deposit",
-                minDeposit: 500,
-                games: ["slots", "table"],
+                bonusType: "maxbonus",
+                minDeposit: 100,
+                games: ["slots", "table", "live"],
                 details: {
                     wagering: "Вейджер x25",
                     maxWin: "50 000 руб",
                     validity: "7 дней",
-                    games: "Все слоты, кроме указанных",
-                    minDeposit: "500 руб",
-                    verification: "Не требуется",
-                    withdrawal: "12 часов"
+                    games: "Все слоты, настольные и live-игры",
+                    minDeposit: "100 руб",
+                    verification: "Требуется",
+                    withdrawal: "5-15 минут",
+                    speed: "Экспресс-вывод",
+                    risk: "Низкий"
                 },
-                link: "https://vulkan-casino.example.com"
+                link: "https://bttrc.ru/go/spbjptxpva"
             },
             {
                 id: 2,
-                title: "RoX Casino",
+                title: "MelBet",
                 badge: "VIP",
-                rating: 4.6,
-                bonus: "200 фриспинов в Book of Dead",
+                rating: 4.9,
+                bonus: "130% + 30 фриспинов",
                 features: [
-                    "Вейджер x30",
-                    "Макс. выигрыш 50 000 руб",
-                    "Без верификации",
-                    "Поддержка 24/7"
+                    "Минимальный депозит: 100₽",
+                    "Вывод средств: 10-20 мин",
+                    "Верификация: Есть",
+                    "Вейджер: x20"
                 ],
-                type: "freespins",
-                minDeposit: 1000,
-                games: ["slots"],
+                type: "deposit",
+                bonusType: "maxbonus",
+                minDeposit: 100,
+                games: ["slots", "table", "live", "strategy"],
                 details: {
-                    wagering: "Вейджер x30",
-                    maxWin: "50 000 руб",
-                    validity: "3 дня",
-                    games: "Только Book of Dead",
-                    minDeposit: "1000 руб",
-                    verification: "Не требуется",
-                    withdrawal: "24 часа"
+                    wagering: "Вейджер x20",
+                    maxWin: "100 000 руб",
+                    validity: "10 дней",
+                    games: "Все игры казино",
+                    minDeposit: "100 руб",
+                    verification: "Требуется",
+                    withdrawal: "10-20 минут",
+                    speed: "Быстрый вывод",
+                    risk: "Низкий"
                 },
-                link: "https://rox-casino.example.com"
+                link: "https://bttrc.ru/go/s3g8x82qqi"
             },
             {
                 id: 3,
-                title: "Play Fortuna",
-                badge: "Премиум",
-                rating: 4.9,
-                bonus: "15% кешбэк еженедельно",
+                title: "RT Casino",
+                badge: "Безопасный",
+                rating: 4.6,
+                bonus: "150% к депозиту",
                 features: [
-                    "На все проигрыши",
-                    "Без условий отыгрыша",
-                    "Мгновенное начисление",
-                    "Минимальный вывод 500 руб"
+                    "Минимальный депозит: 500₽",
+                    "Вывод средств: 15-30 мин",
+                    "Верификация: Есть",
+                    "Без вейджера"
                 ],
-                type: "cashback",
-                minDeposit: 0,
-                games: ["slots", "table", "live"],
+                type: "deposit",
+                bonusType: "safe",
+                minDeposit: 500,
+                games: ["slots", "table"],
                 details: {
                     wagering: "Без вейджера",
-                    maxWin: "Не ограничен",
-                    validity: "Постоянно",
-                    games: "Все игры",
+                    maxWin: "25 000 руб",
+                    validity: "14 дней",
+                    games: "Слоты и настольные игры",
+                    minDeposit: "500 руб",
+                    verification: "Требуется",
+                    withdrawal: "15-30 минут",
+                    speed: "Стандартный вывод",
+                    risk: "Низкий"
+                },
+                link: "https://bttrc.ru/go/slxlrrhbfk"
+            },
+            {
+                id: 4,
+                title: "Jet Casino",
+                badge: "Скоростной",
+                rating: 4.7,
+                bonus: "100% + 50 фриспинов",
+                features: [
+                    "Минимальный депозит: 200₽",
+                    "Вывод средств: 5-10 мин",
+                    "Верификация: Есть",
+                    "Вейджер: x15"
+                ],
+                type: "deposit",
+                bonusType: "maxbonus",
+                minDeposit: 200,
+                games: ["slots", "live"],
+                details: {
+                    wagering: "Вейджер x15",
+                    maxWin: "75 000 руб",
+                    validity: "5 дней",
+                    games: "Слоты и live-казино",
+                    minDeposit: "200 руб",
+                    verification: "Требуется",
+                    withdrawal: "5-10 минут",
+                    speed: "Супербыстрый вывод",
+                    risk: "Низкий"
+                },
+                link: "https://bttrc.ru/go/s52s5n5qym"
+            },
+            {
+                id: 5,
+                title: "Flagman Casino",
+                badge: "Максимальный",
+                rating: 4.5,
+                bonus: "250% + 70 фриспинов",
+                features: [
+                    "Минимальный депозит: 300₽",
+                    "Вывод средств: 10-25 мин",
+                    "Верификация: Есть",
+                    "Вейджер: x35"
+                ],
+                type: "deposit",
+                bonusType: "maxbonus",
+                minDeposit: 300,
+                games: ["slots", "table", "live", "strategy"],
+                details: {
+                    wagering: "Вейджер x35",
+                    maxWin: "150 000 руб",
+                    validity: "30 дней",
+                    games: "Все доступные игры",
+                    minDeposit: "300 руб",
+                    verification: "Требуется",
+                    withdrawal: "10-25 минут",
+                    speed: "Быстрый вывод",
+                    risk: "Средний"
+                },
+                link: "https://bttrc.ru/go/s8po2l4f8z"
+            },
+            {
+                id: 6,
+                title: "Lev Casino",
+                badge: "Льготный",
+                rating: 4.4,
+                bonus: "120% к депозиту",
+                features: [
+                    "Минимальный депозит: 100₽",
+                    "Вывод средств: 15-40 мин",
+                    "Верификация: Есть",
+                    "Вейджер: x10"
+                ],
+                type: "deposit",
+                bonusType: "safe",
+                minDeposit: 100,
+                games: ["slots", "table"],
+                details: {
+                    wagering: "Вейджер x10",
+                    maxWin: "30 000 руб",
+                    validity: "21 день",
+                    games: "Слоты и настольные",
+                    minDeposit: "100 руб",
+                    verification: "Требуется",
+                    withdrawal: "15-40 минут",
+                    speed: "Стандартный вывод",
+                    risk: "Низкий"
+                },
+                link: "https://bttrc.ru/go/se0v5pfjcq"
+            },
+            {
+                id: 7,
+                title: "7K Casino",
+                badge: "Бездепозитный",
+                rating: 4.3,
+                bonus: "100 фриспинов",
+                features: [
+                    "Минимальный депозит: 0₽",
+                    "Вывод средств: 30-60 мин",
+                    "Верификация: Есть",
+                    "Вейджер: x30"
+                ],
+                type: "freespins",
+                bonusType: "nodeposit",
+                minDeposit: 0,
+                games: ["slots"],
+                details: {
+                    wagering: "Вейджер x30",
+                    maxWin: "5 000 руб",
+                    validity: "3 дня",
+                    games: "Только слоты",
                     minDeposit: "Не требуется",
                     verification: "Требуется",
-                    withdrawal: "6 часов"
+                    withdrawal: "30-60 минут",
+                    speed: "Стандартный вывод",
+                    risk: "Низкий"
                 },
-                link: "https://playfortuna.example.com"
+                link: "https://bttrc.ru/go/sxy9ja32wo"
             }
         ];
 
-        // Wheel prizes - упрощенная версия без промокодов
+        // Wheel prizes - теперь с реальными ссылками
         const wheelPrizes = [
-            { 
-                text: "100% БОНУС", 
-                label: "100%<br>БОНУС",
-                color: "#6C63FF",
-                description: "Получите удвоение вашего первого депозита до 10 000 рублей",
-                link: "https://vulkan-casino.example.com",
-                casino: "Vulkan Casino"
-            },
-            { 
-                text: "50 ФРИСПИНОВ", 
-                label: "50<br>ФРИСПИНОВ",
-                color: "#FF6584",
-                description: "50 фриспинов в популярном слоте Book of Dead",
-                link: "https://rox-casino.example.com",
-                casino: "RoX Casino"
-            },
-            { 
-                text: "50% БОНУС", 
-                label: "50%<br>БОНУС",
-                color: "#00D2A8",
-                description: "Получите дополнительно 50% к любому депозиту",
-                link: "https://playfortuna.example.com",
-                casino: "Play Fortuna"
-            },
-            { 
-                text: "15% КЕШБЭК", 
-                label: "15%<br>КЕШБЭК",
-                color: "#FFD166",
-                description: "Еженедельный кешбэк 15% от всех проигрышей",
-                link: "https://vulkan-casino.example.com",
-                casino: "Vulkan Casino"
-            },
-            { 
-                text: "УДВОЕНИЕ", 
-                label: "УДВОЕНИЕ<br>ДЕПОЗИТА",
-                color: "#8B85FF",
-                description: "Ваш первый депозит будет удвоен до 5 000 рублей",
-                link: "https://rox-casino.example.com",
-                casino: "RoX Casino"
-            },
             { 
                 text: "200% БОНУС", 
                 label: "200%<br>БОНУС",
+                color: "#6C63FF",
+                description: "Получите тройную сумму вашего первого депозита в Beef Casino",
+                link: "https://bttrc.ru/go/spbjptxpva",
+                casino: "Beef Casino"
+            },
+            { 
+                text: "130% + 30FS", 
+                label: "130%<br>+30FS",
+                color: "#FF6584",
+                description: "130% к депозиту + 30 фриспинов в MelBet",
+                link: "https://bttrc.ru/go/s3g8x82qqi",
+                casino: "MelBet"
+            },
+            { 
+                text: "150% БОНУС", 
+                label: "150%<br>БОНУС",
+                color: "#00D2A8",
+                description: "Получите 150% к любому депозиту в RT Casino",
+                link: "https://bttrc.ru/go/slxlrrhbfk",
+                casino: "RT Casino"
+            },
+            { 
+                text: "100% + 50FS", 
+                label: "100%<br>+50FS",
+                color: "#FFD166",
+                description: "Удвоение депозита + 50 фриспинов в Jet Casino",
+                link: "https://bttrc.ru/go/s52s5n5qym",
+                casino: "Jet Casino"
+            },
+            { 
+                text: "250% + 70FS", 
+                label: "250%<br>+70FS",
+                color: "#8B85FF",
+                description: "250% к депозиту + 70 фриспинов в Flagman Casino",
+                link: "https://bttrc.ru/go/s8po2l4f8z",
+                casino: "Flagman Casino"
+            },
+            { 
+                text: "100 ФРИСПИНОВ", 
+                label: "100<br>ФРИСПИНОВ",
                 color: "#5A52D5",
-                description: "Получите тройную сумму вашего первого депозита",
-                link: "https://playfortuna.example.com",
-                casino: "Play Fortuna"
+                description: "100 фриспинов без депозита в 7K Casino",
+                link: "https://bttrc.ru/go/sxy9ja32wo",
+                casino: "7K Casino"
             }
         ];
 
@@ -2221,7 +2438,7 @@
                     document.querySelectorAll('#step1 .option-card').forEach(c => c.classList.remove('active'));
                     this.classList.add('active');
                     steps[1].completed = true;
-                    steps[1].selected = this;
+                    steps[1].selected = this.dataset.value;
                     activateStep2();
                 });
             });
@@ -2232,7 +2449,7 @@
                     document.querySelectorAll('#step2 .deposit-value').forEach(v => v.classList.remove('active'));
                     this.classList.add('active');
                     steps[2].completed = true;
-                    steps[2].selected = this;
+                    steps[2].selected = this.dataset.value;
                     activateStep3();
                 });
             });
@@ -2241,13 +2458,17 @@
             document.querySelectorAll('#step3 .game-card').forEach(card => {
                 card.addEventListener('click', function() {
                     this.classList.toggle('active');
-                    steps[3].completed = document.querySelectorAll('#step3 .game-card.active').length > 0;
+                    // Обновляем выбранные игры
+                    steps[3].selected = Array.from(document.querySelectorAll('#step3 .game-card.active'))
+                        .map(game => game.dataset.value);
+                    steps[3].completed = steps[3].selected.length > 0;
                 });
             });
             
-            // Find button
+            // Find button - теперь фильтрует по выбранным параметрам
             document.getElementById('findButton').addEventListener('click', function() {
                 const resultsSection = document.getElementById('comparison');
+                generateFilteredCards();
                 resultsSection.classList.add('active');
                 
                 // Scroll to results
@@ -2270,12 +2491,95 @@
             document.querySelector('#step3 .step-number').classList.add('active');
         }
 
-        // Generate cards
-        function generateCards() {
+        // Функция для получения текущих офферов для страницы
+        function getCurrentOffers() {
+            const startIndex = (currentPage - 1) * offersPerPage;
+            const endIndex = startIndex + offersPerPage;
+            return filteredOffers.slice(startIndex, endIndex);
+        }
+
+        // Функция для генерации пагинации
+        function generatePagination() {
+            const paginationContainer = document.getElementById('pagination');
+            const totalPages = Math.ceil(filteredOffers.length / offersPerPage);
+            
+            if (totalPages <= 1) {
+                paginationContainer.style.display = 'none';
+                return;
+            }
+            
+            paginationContainer.style.display = 'flex';
+            let paginationHTML = '';
+            
+            // Кнопка "Назад"
+            paginationHTML += `
+                <button class="page-btn" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            `;
+            
+            // Страницы
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - 2);
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                if (i === startPage && startPage > 1) {
+                    paginationHTML += '<span class="page-dots">...</span>';
+                }
+                
+                paginationHTML += `
+                    <button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">
+                        ${i}
+                    </button>
+                `;
+                
+                if (i === endPage && endPage < totalPages) {
+                    paginationHTML += '<span class="page-dots">...</span>';
+                }
+            }
+            
+            // Кнопка "Вперед"
+            paginationHTML += `
+                <button class="page-btn" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            `;
+            
+            paginationContainer.innerHTML = paginationHTML;
+        }
+
+        // Функция смены страницы
+        window.changePage = function(page) {
+            const totalPages = Math.ceil(filteredOffers.length / offersPerPage);
+            
+            if (page < 1 || page > totalPages || page === currentPage) {
+                return;
+            }
+            
+            currentPage = page;
+            generateCardsForCurrentPage();
+            generatePagination();
+            
+            // Прокрутка к началу карточек
+            document.getElementById('cardsContainer').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        };
+
+        // Генерация карточек для текущей страницы
+        function generateCardsForCurrentPage() {
             const container = document.getElementById('cardsContainer');
+            const currentOffers = getCurrentOffers();
+            
             container.innerHTML = '';
             
-            offers.forEach(offer => {
+            currentOffers.forEach(offer => {
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
@@ -2315,6 +2619,80 @@
                 `;
                 container.appendChild(card);
             });
+            
+            // Если на странице меньше 3 карточек, добавляем пустые контейнеры для выравнивания
+            if (currentOffers.length < 3 && window.innerWidth >= 992) {
+                const emptyCardsNeeded = 3 - currentOffers.length;
+                for (let i = 0; i < emptyCardsNeeded; i++) {
+                    const emptyCard = document.createElement('div');
+                    emptyCard.className = 'card empty-card';
+                    emptyCard.style.visibility = 'hidden';
+                    emptyCard.style.height = '0';
+                    emptyCard.style.padding = '0';
+                    emptyCard.style.border = 'none';
+                    container.appendChild(emptyCard);
+                }
+            }
+        }
+
+        // Генерация отфильтрованных карточек по выбранным параметрам
+        function generateFilteredCards() {
+            // Получаем выбранные параметры
+            const selectedBonusType = steps[1].selected;
+            const selectedDeposit = parseInt(steps[2].selected);
+            const selectedGames = steps[3].selected;
+            
+            // Фильтруем офферы
+            filteredOffers = offers.filter(offer => {
+                // Фильтр по типу бонуса
+                if (selectedBonusType && offer.bonusType !== selectedBonusType) {
+                    return false;
+                }
+                
+                // Фильтр по минимальному депозиту
+                if (selectedDeposit === 0) {
+                    // Если выбрано "Без депозита", показываем только бездепозитные
+                    if (offer.minDeposit > 0) return false;
+                } else {
+                    // Если выбран конкретный депозит, показываем соответствующие
+                    if (offer.minDeposit > selectedDeposit) return false;
+                }
+                
+                // Фильтр по играм (если выбраны игры)
+                if (selectedGames.length > 0) {
+                    const hasMatchingGame = selectedGames.some(game => 
+                        offer.games.includes(game)
+                    );
+                    if (!hasMatchingGame) return false;
+                }
+                
+                return true;
+            });
+            
+            // Если ничего не найдено, показываем все офферы
+            if (filteredOffers.length === 0) {
+                filteredOffers = offers;
+            }
+            
+            // Сортируем по рейтингу
+            filteredOffers.sort((a, b) => b.rating - a.rating);
+            
+            // Сбрасываем текущую страницу
+            currentPage = 1;
+            
+            // Генерируем карточки для текущей страницы
+            generateCardsForCurrentPage();
+            
+            // Генерируем пагинацию
+            generatePagination();
+        }
+
+        // Generate cards (начальный показ всех карточек)
+        function generateCards() {
+            filteredOffers = offers;
+            currentPage = 1;
+            generateCardsForCurrentPage();
+            generatePagination();
         }
 
         // Toggle offer for comparison
@@ -2345,8 +2723,9 @@
             const mainList = document.getElementById('detailsMain');
             mainList.innerHTML = `
                 <li><span class="details-label">Рейтинг:</span><span class="details-value">${offer.rating}/5</span></li>
-                <li><span class="details-label">Тип бонуса:</span><span class="details-value">${getBonusType(offer.type)}</span></li>
+                <li><span class="details-label">Тип бонуса:</span><span class="details-value">${getBonusType(offer.bonusType)}</span></li>
                 <li><span class="details-label">Мин. депозит:</span><span class="details-value">${offer.minDeposit === 0 ? 'Не требуется' : offer.minDeposit + ' руб'}</span></li>
+                <li><span class="details-label">Вывод средств:</span><span class="details-value">${offer.details.withdrawal}</span></li>
             `;
             
             // Bonus conditions
@@ -2362,8 +2741,8 @@
             const featuresList = document.getElementById('detailsFeatures');
             featuresList.innerHTML = `
                 <li><span class="details-label">Верификация:</span><span class="details-value">${offer.details.verification}</span></li>
-                <li><span class="details-label">Вывод средств:</span><span class="details-value">${offer.details.withdrawal}</span></li>
-                <li><span class="details-label">Поддержка:</span><span class="details-value">24/7</span></li>
+                <li><span class="details-label">Скорость вывода:</span><span class="details-value">${offer.details.speed}</span></li>
+                <li><span class="details-label">Уровень риска:</span><span class="details-value">${offer.details.risk}</span></li>
             `;
             
             // Set claim button
@@ -2383,11 +2762,12 @@
 
         function getBonusType(type) {
             const types = {
-                'deposit': 'Депозитный бонус',
-                'freespins': 'Фриспины',
+                'maxbonus': 'Максимальный бонус',
+                'safe': 'Безопасный вариант',
+                'nodeposit': 'Без депозита',
                 'cashback': 'Кешбэк',
-                'nodeposit': 'Бездепозитный',
-                'mixed': 'Комбинированный'
+                'deposit': 'Депозитный бонус',
+                'freespins': 'Фриспины'
             };
             return types[type] || type;
         }
@@ -2500,7 +2880,7 @@
             });
         }
 
-        // Show prize modal - упрощенная версия без промокодов
+        // Show prize modal - теперь с реальными ссылками
         function showPrizeModal(prize) {
             document.getElementById('prizeTitle').textContent = prize.text;
             document.getElementById('prizeDescription').innerHTML = `
@@ -2554,6 +2934,14 @@
                         ${selectedOffers.map(offer => `<td>${offer.minDeposit === 0 ? 'Не требуется' : offer.minDeposit + ' руб'}</td>`).join('')}
                     </tr>
                     <tr>
+                        <td>Вывод средств</td>
+                        ${selectedOffers.map(offer => `<td>${offer.details.withdrawal}</td>`).join('')}
+                    </tr>
+                    <tr>
+                        <td>Верификация</td>
+                        ${selectedOffers.map(offer => `<td>${offer.details.verification}</td>`).join('')}
+                    </tr>
+                    <tr>
                         <td>Вейджер</td>
                         ${selectedOffers.map(offer => `<td>${offer.details.wagering}</td>`).join('')}
                     </tr>
@@ -2562,16 +2950,8 @@
                         ${selectedOffers.map(offer => `<td>${offer.details.maxWin}</td>`).join('')}
                     </tr>
                     <tr>
-                        <td>Действует</td>
+                        <td>Срок действия</td>
                         ${selectedOffers.map(offer => `<td>${offer.details.validity}</td>`).join('')}
-                    </tr>
-                    <tr>
-                        <td>Верификация</td>
-                        ${selectedOffers.map(offer => `<td>${offer.details.verification}</td>`).join('')}
-                    </tr>
-                    <tr>
-                        <td>Вывод</td>
-                        ${selectedOffers.map(offer => `<td>${offer.details.withdrawal}</td>`).join('')}
                     </tr>
                 </tbody>
             `;
@@ -2617,6 +2997,8 @@
             if (window.innerWidth > 992) {
                 closeMobileMenu();
             }
+            // Перегенерация карточек при изменении размера
+            generateCardsForCurrentPage();
         });
     </script>
 </body>
